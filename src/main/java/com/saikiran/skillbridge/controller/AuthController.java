@@ -13,6 +13,8 @@ import com.saikiran.skillbridge.entity.User;
 import com.saikiran.skillbridge.repository.UserRepository;
 import com.saikiran.skillbridge.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AuthController {
 
@@ -46,24 +48,26 @@ public class AuthController {
         return "redirect:/login";
     }
 
-
-    @PostMapping("/login")
-    public String loginUser(
-            @RequestParam String email,
-            @RequestParam String password) {
-
-
-        Optional<User> user = userRepository.findByEmail(email);
+@PostMapping("/login")
+public String loginUser(
+        @RequestParam String email,
+        @RequestParam String password,
+        HttpSession session) {
 
 
-        if(user.isPresent() && user.get().getPassword().equals(password)) {
-
-            return "redirect:/dashboard";
-
-        }
+    Optional<User> user = userRepository.findByEmail(email);
 
 
-        return "redirect:/login";
+    if(user.isPresent() && user.get().getPassword().equals(password)) {
+
+        session.setAttribute("loggedUser", user.get());
+
+        return "redirect:/dashboard";
+
     }
+
+
+    return "redirect:/login";
+  } 
 
 }

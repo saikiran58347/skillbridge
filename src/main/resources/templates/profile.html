@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>My Profile</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+<h1>My Profile</h1>
+
+
+<p>
+Name:
+<span th:text="${user.fullName}"></span>
+</p>
+
+
+<p>
+Email:
+<span th:text="${user.email}"></span>
+</p>
+
+
+<p>
+Branch:
+<span th:text="${user.branch}"></span>
+</p>
+
+
+<p>
+Year:
+<span th:text="${user.year}"></span>
+</p>
+
+
+<p>
+Bio:
+<span th:text="${user.bio}"></span>
+</p>
+
+
+<a href="/dashboard">
+Back to Dashboard
+</a>
+
+
+</div>
+
+</body>
+
+</html>
