@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>My Skills</title>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>My Skills</h1>
+
+
+<a href="/add-skill">
+Add New Skill
+</a>
+
+
+<br><br>
+
+
+<div th:each="skill : ${skills}">
+
+
+<h2 th:text="${skill.name}"></h2>
+
+
+<p th:text="${skill.description}"></p>
+
+
+<p>
+Level:
+<span th:text="${skill.level}"></span>
+</p>
+
+
+<hr>
+
+
+</div>
+
+
+<a href="/dashboard">
+Back to Dashboard
+</a>
+
+
+</div>
+
+
+</body>
+
+</html>

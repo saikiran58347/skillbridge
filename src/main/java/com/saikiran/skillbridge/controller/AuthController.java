@@ -60,7 +60,9 @@ public String loginUser(
 
     if(user.isPresent() && user.get().getPassword().equals(password)) {
 
+
         session.setAttribute("loggedUser", user.get());
+
 
         return "redirect:/dashboard";
 
@@ -68,6 +70,6 @@ public String loginUser(
 
 
     return "redirect:/login";
-  } 
+}
 
 }
