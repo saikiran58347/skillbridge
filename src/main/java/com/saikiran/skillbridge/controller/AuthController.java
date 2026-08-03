@@ -33,7 +33,10 @@ public class AuthController {
     public String registerPage() {
         return "register";
     }
-
+    @GetMapping("/dashboard")
+    public String dashboard() {
+    return "dashboard";
+    }
 
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
@@ -55,7 +58,7 @@ public class AuthController {
 
         if(user.isPresent() && user.get().getPassword().equals(password)) {
 
-            return "redirect:/";
+            return "redirect:/dashboard";
 
         }
 
