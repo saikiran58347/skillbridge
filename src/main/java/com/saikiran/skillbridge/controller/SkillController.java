@@ -19,6 +19,7 @@ public class SkillController {
     @Autowired
     private SkillRepository skillRepository;
 
+    // My Skills
     @GetMapping("/skills")
     public String skillsPage(Model model, HttpSession session) {
 
@@ -31,6 +32,21 @@ public class SkillController {
         model.addAttribute("skills", skillRepository.findByUser(user));
 
         return "skills";
+    }
+
+    // Browse All Skills
+    @GetMapping("/browse-skills")
+    public String browseSkills(Model model, HttpSession session) {
+
+        User user = (User) session.getAttribute("loggedUser");
+
+        if (user == null) {
+            return "redirect:/login";
+        }
+
+        model.addAttribute("skills", skillRepository.findAll());
+
+        return "browse-skills";
     }
 
     @GetMapping("/add-skill")
