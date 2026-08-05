@@ -33,12 +33,29 @@ Teacher:
 <span th:text="${skill.user.fullName}"></span>
 </p>
 
+<form th:action="@{/book-skill}" method="post">
+
+<input
+type="hidden"
+name="skillId"
+th:value="${skill.id}">
+
+<button type="submit">
+
+Book Skill
+
+</button>
+
+</form>
+
 <hr>
 
 </div>
 
 <a href="/dashboard">
+
 Back to Dashboard
+
 </a>
 
 </div>
