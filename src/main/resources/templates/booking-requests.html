@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Booking Requests</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Booking Requests</h1>
+
+
+    <!-- No booking requests -->
+
+    <div th:if="${#lists.isEmpty(bookings)}">
+
+        <p>No booking requests yet.</p>
+
+    </div>
+
+
+    <!-- Display bookings -->
+
+    <div th:each="booking : ${bookings}">
+
+        <h2 th:text="${booking.skill.name}"></h2>
+
+
+        <p>
+            Student:
+            <span th:text="${booking.student.fullName}"></span>
+        </p>
+
+
+        <p>
+            Status:
+            <span th:text="${booking.status}"></span>
+        </p>
+
+
+        <!-- ============================= -->
+        <!-- PENDING -->
+        <!-- ============================= -->
+
+        <div th:if="${booking.status == 'Pending'}">
+
+            <form action="/accept-booking" method="post">
+
+                <input
+                    type="hidden"
+                    name="bookingId"
+                    th:value="${booking.id}">
+
+                <button type="submit">
+                    Accept
+                </button>
+
+            </form>
+
+
+            <br>
+
+
+            <form action="/reject-booking" method="post">
+
+                <input
+                    type="hidden"
+                    name="bookingId"
+                    th:value="${booking.id}">
+
+                <button type="submit">
+                    Reject
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- ACCEPTED - SCHEDULE -->
+        <!-- ============================= -->
+
+        <div th:if="${booking.status == 'Accepted'}">
+
+            <h3>Schedule Booking</h3>
+
+            <form action="/schedule-booking" method="post">
+
+                <input
+                    type="hidden"
+                    name="bookingId"
+                    th:value="${booking.id}">
+
+
+                <label>
+                    Date:
+                </label>
+
+                <br>
+
+                <input
+                    type="date"
+                    name="bookingDate"
+                    required>
+
+
+                <br><br>
+
+
+                <label>
+                    Time:
+                </label>
+
+                <br>
+
+                <input
+                    type="time"
+                    name="bookingTime"
+                    required>
+
+
+                <br><br>
+
+
+                <button type="submit">
+                    Confirm Schedule
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- SCHEDULED -->
+        <!-- ============================= -->
+
+        <div th:if="${booking.status == 'Scheduled'}">
+
+            <h3>Booking Scheduled ✅</h3>
+
+            <p>
+                Date:
+                <span th:text="${booking.bookingDate}"></span>
+            </p>
+
+            <p>
+                Time:
+                <span th:text="${booking.bookingTime}"></span>
+            </p>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- REJECTED -->
+        <!-- ============================= -->
+
+        <div th:if="${booking.status == 'Rejected'}">
+
+            <p>
+                This booking request was rejected.
+            </p>
+
+        </div>
+
+
+        <hr>
+
+    </div>
+
+
+    <a href="/dashboard">
+        Back to Dashboard
+    </a>
+
+</div>
+
+</body>
+
+</html>

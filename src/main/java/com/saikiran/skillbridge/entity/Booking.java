@@ -1,5 +1,8 @@
 package com.saikiran.skillbridge.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,12 +27,19 @@ public class Booking {
 
     private String status;
 
+    private LocalDate bookingDate;
+
+    private LocalTime bookingTime;
+
+
     public Booking() {
     }
+
 
     public Long getId() {
         return id;
     }
+
 
     public User getStudent() {
         return student;
@@ -39,6 +49,7 @@ public class Booking {
         this.student = student;
     }
 
+
     public Skill getSkill() {
         return skill;
     }
@@ -47,6 +58,7 @@ public class Booking {
         this.skill = skill;
     }
 
+
     public String getStatus() {
         return status;
     }
@@ -54,4 +66,23 @@ public class Booking {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
+    public LocalDate getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+
+    public LocalTime getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(LocalTime bookingTime) {
+        this.bookingTime = bookingTime;
+    }
+
 }
